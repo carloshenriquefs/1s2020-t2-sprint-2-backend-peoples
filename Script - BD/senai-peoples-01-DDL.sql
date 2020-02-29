@@ -2,10 +2,31 @@ CREATE DATABASE M_Peoples;
 
 USE M_Peoples;
 
+
+CREATE TABLE Usuario(
+IdUsuario INT PRIMARY KEY IDENTITY,
+Email VARCHAR(25) NOT NULL,
+Senha CHAR(6) NOT NULL
+);
+
+CREATE TABLE TipoUsuario(
+IdTipoUsuario INT PRIMARY KEY IDENTITY,
+IdUsuario INT FOREIGN KEY REFERENCES Usuario (IdUsuario)
+);
+
 CREATE TABLE Funcionarios(
 	IdFuncionarios INT PRIMARY KEY IDENTITY,
 	Nome VARCHAR(255) NOT NULL,
 	Sobrenome VARCHAR(200) NOT NULL,
-	DataNascimentoF VARCHAR(255) NOT NULL
+	DataNascimentoF VARCHAR(255) NOT NULL,
+	IdUsuario INT FOREIGN KEY REFERENCES Usuario (IdUsuario)
 );
 
+TRUNCATE TABLE Usuario;
+DROP TABLE Usuario;
+DROP TABLE TipoUsuario;
+DROP TABLE Funcionarios;
+
+SELECT * FROM Funcionarios;
+SELECT * FROM Usuario;
+SELECT * FROM TipoUsuario;

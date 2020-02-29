@@ -3,10 +3,6 @@ CREATE DATABASE M_Peoples;
 USE M_Peoples;
 
 SELECT *FROM Funcionarios;
-
-CREATE PROCEDURE OrdenarDESC
-AS
-SELECT * FROM Funcionarios ORDER BY Nome DESC
-
-EXEC OrdenarDESC
+SELECT * FROM Usuario;
+SELECT * FROM TipoUsuario;
 
