@@ -9,14 +9,25 @@ namespace Senai.Peoples.WebApi.Interface
     interface IFuncionarioRepository
     {
         List<FuncionarioDomain> Listar();
-        void Cadastrar(FuncionarioDomain funcionario);
+
         FuncionarioDomain BuscarPorId(int id);
-        void Deletar(int id);
-        void AtualizarIdUrl(int id, FuncionarioDomain funcionario);
-        void AtualizarIdCorpo(int id, FuncionarioDomain funcionario);
-        FuncionarioDomain ObrigatorioNome(string nome);
+
+        void Cadastrar(FuncionarioDomain funcionario);
+
         FuncionarioDomain BuscarNomeFuncionario(string nome);
-        List<FuncionarioDomain> OrdenarDESC();
+
+        void Atualizar(int id, FuncionarioDomain funcionarioAtualizado);
+
+        void Deletar(int id);
+
+        List<FuncionarioDomain> ListarNomeCompleto();
+
+        List<FuncionarioDomain> ListarOrdenado(string ordem);
+
+        FuncionarioDomain ObrigatorioNome(string nome);
+        //void AtualizarIdUrl(int id, FuncionarioDomain funcionario);
+        //void AtualizarIdCorpo(int id, FuncionarioDomain funcionario);
+
 
     }
 }

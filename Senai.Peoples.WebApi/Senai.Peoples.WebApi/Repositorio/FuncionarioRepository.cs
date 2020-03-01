@@ -35,7 +35,7 @@ namespace Senai.Peoples.WebApi.Repositorio
                     {
                         FuncionarioDomain funcionario = new FuncionarioDomain()
                         {
-                            IdFuncionarios = Convert.ToInt32(rdr[0]),
+                            IdFuncionario = Convert.ToInt32(rdr[0]),
                             Nome = rdr["Nome"].ToString(),
                             Sobrenome = rdr["Sobrenome"].ToString(),
                             DataNascimentoF = rdr["DataNascimentoF"].ToString()
@@ -69,6 +69,8 @@ namespace Senai.Peoples.WebApi.Repositorio
 
 
 
+
+
                 }
 
             }
@@ -95,7 +97,7 @@ namespace Senai.Peoples.WebApi.Repositorio
                     {
                         FuncionarioDomain funcionario = new FuncionarioDomain
                         {
-                            IdFuncionarios = Convert.ToInt32(rdr["IDFuncionarios"]),
+                            IdFuncionario = Convert.ToInt32(rdr["IDFuncionarios"]),
                             Nome = rdr["Nome"].ToString(),
                             Sobrenome = rdr["Sobrenome"].ToString(),
                             DataNascimentoF = rdr["DataNascimentoF"].ToString()
@@ -135,7 +137,7 @@ namespace Senai.Peoples.WebApi.Repositorio
 
                 using (SqlCommand cmd = new SqlCommand(queryUpdate, con))
                 {
-                    cmd.Parameters.AddWithValue("@ID", funcionario.IdFuncionarios);
+                    cmd.Parameters.AddWithValue("@ID", funcionario.IdFuncionario);
                     cmd.Parameters.AddWithValue("@Nome", funcionario.Nome);
                     cmd.Parameters.AddWithValue("@Sobrenome", funcionario.Sobrenome);
                     cmd.Parameters.AddWithValue("@DataNascimentoF", funcionario.DataNascimentoF);
@@ -156,7 +158,7 @@ namespace Senai.Peoples.WebApi.Repositorio
 
                 using (SqlCommand cmd = new SqlCommand(queryAtualizar, con))
                 {
-                    cmd.Parameters.AddWithValue("@ID", funcionarioA.IdFuncionarios);
+                    cmd.Parameters.AddWithValue("@ID", funcionarioA.IdFuncionario);
                     cmd.Parameters.AddWithValue("@Nome", funcionarioA.Nome);
                     cmd.Parameters.AddWithValue("@Sobrenome", funcionarioA.Sobrenome);
                     cmd.Parameters.AddWithValue("@DataNascimentoF", funcionarioA.DataNascimentoF);
@@ -210,7 +212,7 @@ namespace Senai.Peoples.WebApi.Repositorio
                     {
                         FuncionarioDomain funcionarioNome = new FuncionarioDomain
                         {
-                            IdFuncionarios = Convert.ToInt32(rdr["IDFuncionarios"]),
+                            IdFuncionario = Convert.ToInt32(rdr["IDFuncionarios"]),
                             Nome = rdr["Nome"].ToString(),
                             Sobrenome = rdr["Sobrenome"].ToString(),
                             DataNascimentoF = rdr["DataNascimentoF"].ToString()
@@ -224,36 +226,90 @@ namespace Senai.Peoples.WebApi.Repositorio
 
         }
 
-        public List<FuncionarioDomain> OrdenarDESC()
+        public void Atualizar(int id, FuncionarioDomain funcionarioAtualizado)
         {
-            List<FuncionarioDomain> funcionario = new List<FuncionarioDomain>();
-
             using(SqlConnection con = new SqlConnection(StringConexao))
             {
-                string queryOrdenar = "EXEC OrdenarDESC";
+                string queryUpdate = "UPDATE Funcionarios SET Nome = @Nome, Sobrenome = @Sobrenome, DataNascimentoF = @DataNascimentoF WHERE IdFuncionario = @ID";
+
+                using (SqlCommand cmd = new SqlCommand(queryUpdate, con))
+                {
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    cmd.Parameters.AddWithValue("@Nome", funcionarioAtualizado.Nome);
+                    cmd.Parameters.AddWithValue("@Sobrenome", funcionarioAtualizado.Sobrenome);
+                    cmd.Parameters.AddWithValue("@DataNascimentoF", funcionarioAtualizado.DataNascimentoF);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public List<FuncionarioDomain> ListarNomeCompleto()
+        {
+            List<FuncionarioDomain> funcionarios = new List<FuncionarioDomain>();
+
+           using(SqlConnection con = new SqlConnection(StringConexao))
+            {
+                string querySelect = "SELECT IdFuncionario, CONCAT (Nome, ' ', Sobrenome), DataNascimentoF FROM Funcionarios";
 
                 con.Open();
 
                 SqlDataReader rdr;
 
-                using(SqlCommand cmd = new SqlCommand(queryOrdenar, con))
+                using(SqlCommand cmd = new SqlCommand(querySelect, con))
                 {
                     rdr = cmd.ExecuteReader();
 
                     while(rdr.Read())
                     {
-                        FuncionarioDomain funcionarios = new FuncionarioDomain();
+                        FuncionarioDomain funcionario = new FuncionarioDomain
+                        {
+                            IdFuncionario = Convert.ToInt32(rdr["IdFuncionario"]),
+                            Nome = rdr[1].ToString(),
+                            Sobrenome = rdr[2].ToString(),
+                            DataNascimentoF = rdr["DataNascimentoF"].ToString()
+                        };
 
-                        funcionarios.IdFuncionarios = Convert.ToInt32(rdr["IdFuncionarios"]);
-                        funcionarios.Nome = rdr["Nome"].ToString();
-                        funcionarios.Sobrenome = rdr["Sobrenome"].ToString();
-                        funcionarios.DataNascimentoF = rdr["DataNascimentoF"].ToString();
-
-                        funcionario.Add(funcionarios);
+                        funcionarios.Add(funcionario);
                     }
                 }
             }
-            return funcionario;
+            return funcionarios;
+        }
+
+        public List<FuncionarioDomain> ListarOrdenado(string ordem)
+        {
+            List<FuncionarioDomain> funcionarios = new List<FuncionarioDomain>();
+
+            using(SqlConnection con = new SqlConnection(StringConexao))
+            {
+                string querySelectAll = "SELECT IdFuncionario, Nome, Sobrenome, DataNascimentoF FROM Funcionarios ORDER BY Nome {ordem}";
+
+                con.Open();
+
+                SqlDataReader rdr;
+
+                using(SqlCommand cmd = new SqlCommand(querySelectAll, con))
+                {
+                    rdr = cmd.ExecuteReader();
+
+                    while(rdr.Read())
+                    {
+                        FuncionarioDomain funcionario = new FuncionarioDomain
+                        {
+                            IdFuncionario = Convert.ToInt32(rdr["IdFuncionario"]),
+                            Nome = rdr["Nome"].ToString(),
+                            Sobrenome = rdr["Sobrenome"].ToString(),
+                            DataNascimentoF = rdr["DataNascimentoF"].ToString()
+                        };
+
+                        funcionarios.Add(funcionario);
+                    }
+                }
+            }
+            return funcionarios;
         }
     }
 }

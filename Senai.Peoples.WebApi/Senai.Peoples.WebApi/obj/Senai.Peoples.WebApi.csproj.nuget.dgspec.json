@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Carlos Henrique\\Desktop\\GITHUB - Exercicios\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj": {}
+    "D:\\Senai - Santa cecilia\\Bando-de-Dados\\PROJETO1\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Carlos Henrique\\Desktop\\GITHUB - Exercicios\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj": {
+    "D:\\Senai - Santa cecilia\\Bando-de-Dados\\PROJETO1\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Carlos Henrique\\Desktop\\GITHUB - Exercicios\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj",
+        "projectUniqueName": "D:\\Senai - Santa cecilia\\Bando-de-Dados\\PROJETO1\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj",
         "projectName": "Senai.Peoples.WebApi",
-        "projectPath": "C:\\Users\\Carlos Henrique\\Desktop\\GITHUB - Exercicios\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj",
+        "projectPath": "D:\\Senai - Santa cecilia\\Bando-de-Dados\\PROJETO1\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj",
         "packagesPath": "C:\\Users\\Carlos Henrique\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Carlos Henrique\\Desktop\\GITHUB - Exercicios\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\obj\\",
+        "outputPath": "D:\\Senai - Santa cecilia\\Bando-de-Dados\\PROJETO1\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -47,6 +47,10 @@
               "version": "[2.1.1, )",
               "autoReferenced": true
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
               "target": "Package",
@@ -58,9 +62,17 @@
               "version": "[2.1.0, )",
               "autoReferenced": true
             },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.1.9, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[5.6.0, )"
             },
             "runtime.native.System.Data.SqlClient.sni": {
               "target": "Package",

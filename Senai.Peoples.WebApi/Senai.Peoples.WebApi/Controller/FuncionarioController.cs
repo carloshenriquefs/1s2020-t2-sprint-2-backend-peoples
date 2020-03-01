@@ -68,48 +68,70 @@ namespace Senai.Peoples.WebApi.Controller
             return Ok("Funcionário Deletado!");
         }
 
-        [HttpPut("{id}")]
-        public IActionResult AtualizarIdUrl(int id, FuncionarioDomain funcionarioAtualizado)
+        [HttpGet("nomescompletos")]
+        public IActionResult GetFullName()
         {
-            FuncionarioDomain funcionarioBuscado = _funcionarioRepository.BuscarPorId(id);
-
-            if(funcionarioBuscado == null)
-            {
-                return NotFound(new { mensagem = "Gênero não encontrado", erro = true });
-            }
-
-            try
-            {
-                _funcionarioRepository.AtualizarIdUrl(id, funcionarioAtualizado);
-
-                return NoContent();
-            }
-            catch(Exception erro)
-            {
-                return BadRequest(erro);
-            }
+            return Ok(_funcionarioRepository.ListarNomeCompleto());
         }
 
-        [HttpPut]
-        public IActionResult AtualizarIdCorpo(int id,FuncionarioDomain funcionario)
+        [HttpGet("ordenacao/{ordem}")]
+        public IActionResult GetOrderBy(string ordem)
         {
-            FuncionarioDomain funcionarioBuscado = _funcionarioRepository.BuscarPorId(funcionario.IdFuncionarios);
-
-            if(funcionarioBuscado != null)
+            if(ordem != "ASC" && ordem != "DESC")
             {
-                try
-                {
-                    _funcionarioRepository.AtualizarIdCorpo(id,funcionario);
-
-                    return NoContent();
-                }
-                catch(Exception erro)
-                {
-                    return BadRequest(erro);
-                }
+                return BadRequest("Não é possivel ordenar da maneira solicitado");
             }
-            return NotFound(new { mensagem = "Gênero não encontrado", erro = true });
+            return Ok(_funcionarioRepository.ListarOrdenado(ordem));
         }
+
+        [HttpGet("buscar/{buscar}")]
+        public IActionResult GetByName(string busca)
+        {
+            return Ok(_funcionarioRepository.BuscarNomeFuncionario(busca));
+        }
+
+        //[HttpPut("{id}")]
+        //public IActionResult AtualizarIdUrl(int id, FuncionarioDomain funcionarioAtualizado)
+        //{
+        //    FuncionarioDomain funcionarioBuscado = _funcionarioRepository.BuscarPorId(id);
+
+         //   if(funcionarioBuscado == null)
+         //   {
+         //       return NotFound(new { mensagem = "Gênero não encontrado", erro = true });
+         //   }
+
+         //   try
+         //   {
+         //       _funcionarioRepository.AtualizarIdUrl(id, funcionarioAtualizado);
+         //
+         //       return NoContent();
+         //   }
+         //   catch(Exception erro)
+         //   {
+         //       return BadRequest(erro);
+         //   }
+       // }
+
+        //[HttpPut]
+        //public IActionResult AtualizarIdCorpo(int id,FuncionarioDomain funcionario)
+        //{
+          //  FuncionarioDomain funcionarioBuscado = _funcionarioRepository.BuscarPorId(funcionario.IdFuncionario);
+
+            //if(funcionarioBuscado != null)
+            //{
+              //  try
+                //{
+                 //   _funcionarioRepository.AtualizarIdCorpo(id,funcionario);
+
+                //    return NoContent();
+                //}
+                //catch(Exception erro)
+                //{
+                 //   return BadRequest(erro);
+                //}
+           // }
+           // return NotFound(new { mensagem = "Gênero não encontrado", erro = true });
+       // }
 
         //public IActionResult NomeObrigatorio(string nome)
         //{
@@ -127,18 +149,5 @@ namespace Senai.Peoples.WebApi.Controller
             
          //   return Ok("Nome Inserido!");
         //}
-
-        [HttpGet("RetornarFunDESC/{OrdenarDESC}")]
-        public IActionResult OrdenarDESC(string ordenarDESC)
-        {
-            if(ordenarDESC == "DESC")
-            {
-                return StatusCode(200, _funcionarioRepository.OrdenarDESC());
-            }
-            else
-            {
-                return StatusCode(400);
-            }
-        }
     }
 }
