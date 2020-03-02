@@ -10,7 +10,8 @@ namespace Senai.Peoples.WebApi.Repositorio
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private string stringConexao = "Data Source=DESKTOP-GCOFA7F\\SQLEXPRESS; initial catalog=Filmes_manha; user Id=sa; pwd=sa@132";
+        private string stringConexao = "Data Source = LAPTOP-N251D43S\\TEW_SQLEXPRESS; initial catalog=M_Peoples;integrated security = true";
+        //private string stringConexao = "Data Source=DESKTOP-GCOFA7F\\SQLEXPRESS; initial catalog=Filmes_manha; user Id=sa; pwd=sa@132";
 
         public void Cadastrar(UsuarioDomain usuario)
         {

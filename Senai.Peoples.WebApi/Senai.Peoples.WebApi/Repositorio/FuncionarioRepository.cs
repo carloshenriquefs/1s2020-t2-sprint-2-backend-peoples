@@ -10,8 +10,8 @@ namespace Senai.Peoples.WebApi.Repositorio
 {
     public class FuncionarioRepository : IFuncionarioRepository
     {
-
-        private string StringConexao = "Data Source = DEV501\\SQLEXPRESS; initial catalog=M_Peoples; user Id=sa; pwd=sa@132";
+        private string StringConexao = "Data Source = LAPTOP-N251D43S\\TEW_SQLEXPRESS; initial catalog=M_Peoples;integrated security = true";
+        //private string StringConexao = "Data Source = DEV501\\SQLEXPRESS; initial catalog=M_Peoples; user Id=sa; pwd=sa@132";
         //private string StringConexao = "Data Source = LAPTOP-N251D43S\\TEW_SQLEXPRESS; initial catalog=M_Peoples;integrated security = true ";
 
         //LISTAR TODOS OS FUNCIONARIOS
@@ -66,13 +66,7 @@ namespace Senai.Peoples.WebApi.Repositorio
                     con.Open();
 
                     cmd.ExecuteNonQuery();
-
-
-
-
-
                 }
-
             }
         }
 
@@ -101,12 +95,9 @@ namespace Senai.Peoples.WebApi.Repositorio
                             Nome = rdr["Nome"].ToString(),
                             Sobrenome = rdr["Sobrenome"].ToString(),
                             DataNascimentoF = rdr["DataNascimentoF"].ToString()
-
                         };
-
                         return funcionario;
                     }
-
                     return null;
                 }
             }
@@ -149,7 +140,6 @@ namespace Senai.Peoples.WebApi.Repositorio
             }
         }
 
-
         public void AtualizarIdCorpo(int id, FuncionarioDomain funcionarioA)
         {
             using (SqlConnection con = new SqlConnection(StringConexao))
@@ -187,7 +177,6 @@ namespace Senai.Peoples.WebApi.Repositorio
             }
         }
 
-
         public FuncionarioDomain ObrigatorioNome(string nome)
         {
             throw new NotImplementedException();
@@ -223,7 +212,6 @@ namespace Senai.Peoples.WebApi.Repositorio
                     return null;
                 }
             }
-
         }
 
         public void Atualizar(int id, FuncionarioDomain funcionarioAtualizado)
